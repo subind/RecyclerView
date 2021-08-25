@@ -42,7 +42,11 @@ class MainViewModel(private val dispatcher: CoroutineDispatcher, private var myR
     fun prepareDataForExpandableAdapter(transaction: Transaction) : MutableList<ExpandableModel>{
         var expandableCountryList = mutableListOf<ExpandableModel>()
         for (childList in transaction.transactionList) {
-            expandableCountryList.add(ExpandableModel(ExpandableModel.HEADER, childList, false))
+            var expandableModel = ExpandableModel()
+            expandableModel.type = ExpandableModel.HEADER
+            expandableModel.header = childList
+            expandableModel.child = null
+            expandableCountryList.add(expandableModel)
         }
         return expandableCountryList
     }

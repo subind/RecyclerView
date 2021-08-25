@@ -42,7 +42,8 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         val row = myList[position]
         when (row.type) {
             ExpandableModel.HEADER -> {
-                (holder as HeaderViewHolder).headerTitle.text = row.header.headerTitle
+                (holder as HeaderViewHolder).headerTitle.text = row.header?.headerTitle
+                holder.cbParent.isChecked = row.isChecked
 
                 when(row.isExpanded){
                     true -> {
@@ -61,14 +62,22 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                 holder.collapseArrow.setOnClickListener {
                     collapseRow(position)
                 }
+                holder.cbParent.setOnClickListener {
+                    checkedParentRow(position, holder.cbParent.isChecked)
+                }
             }
             ExpandableModel.CHILD -> {
-                (holder as ChildViewHolder).childTitle.text = row.child.childTitle
-                holder.rimNumber.text = row.child.rimNum
-                holder.dateTime.text = row.child.dateTime
-                holder.amount.text = row.child.amount
+                (holder as ChildViewHolder).childTitle.text = row.child?.childTitle
+                holder.rimNumber.text = row.child?.rimNum
+                holder.dateTime.text = row.child?.dateTime
+                holder.amount.text = row.child?.amount
             }
         }
+    }
+
+    private fun checkedParentRow(position: Int, b: Boolean) {
+        myList[position].isChecked = b
+        notifyDataSetChanged()
     }
 
     private fun expandRow(position: Int) {
@@ -76,15 +85,13 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         var nextPosition = position
         when (row.type) {
             ExpandableModel.HEADER -> {
-                myList.removeAt(position)
-                myList.add(
-                    position,
-                    ExpandableModel(ExpandableModel.HEADER, row.header, true)
-                )
-                for (child in row.header.childrenList) {
-                    myList.add(
-                        ++nextPosition,
-                        ExpandableModel(ExpandableModel.CHILD, child)
+                myList[position].isExpanded = true
+                for (child in row.header!!.childrenList) {
+                    var expandableModel = ExpandableModel()
+                    expandableModel.type = ExpandableModel.CHILD
+                    expandableModel.child = child
+                    expandableModel.header = null
+                    myList.add(++nextPosition, expandableModel
                     )
                 }
                 notifyDataSetChanged()
@@ -100,11 +107,7 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         var nextPosition = position + 1
         when (row.type) {
             ExpandableModel.HEADER -> {
-                myList.removeAt(position)
-                myList.add(
-                    position,
-                    ExpandableModel(ExpandableModel.HEADER, row.header, false)
-                )
+                myList[position].isExpanded = false
                 outerloop@ while (true) {
                     if (nextPosition == myList.size || myList[nextPosition].type == ExpandableModel.HEADER) {
                         break@outerloop
@@ -125,6 +128,7 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         internal var headerTitle = itemView.tv_header
         internal var expandArrow = itemView.iv_expand
         internal var collapseArrow = itemView.iv_collapse
+        internal var cbParent = itemView.cb_parent
     }
 
     class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

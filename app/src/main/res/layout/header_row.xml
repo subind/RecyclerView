@@ -56,5 +56,15 @@
         tools:ignore="VectorDrawableCompat"
         android:visibility="gone"/>
 
+    <CheckBox
+        android:id="@+id/cb_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_header"
+        app:layout_constraintStart_toEndOf="@+id/tv_header"
+        app:layout_constraintTop_toTopOf="@+id/tv_header" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
