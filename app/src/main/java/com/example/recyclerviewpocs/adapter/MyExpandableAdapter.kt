@@ -42,35 +42,24 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         val row = myList[position]
         when (row.type) {
             ExpandableModel.HEADER -> {
-                (holder as HeaderViewHolder).headerTitle.text =
-                    row.header.headerTitle
-                if(row.isExpanded) {
-                    holder.expandArrow.visibility = View.GONE
-                    holder.collapseArrow.visibility = View.VISIBLE
-                }else{
-                    holder.collapseArrow.visibility = View.GONE
-                    holder.expandArrow.visibility = View.VISIBLE
+                (holder as HeaderViewHolder).headerTitle.text = row.header.headerTitle
+
+                when(row.isExpanded){
+                    true -> {
+                        holder.expandArrow.visibility = View.GONE
+                        holder.collapseArrow.visibility = View.VISIBLE
+                    }
+                    false -> {
+                        holder.collapseArrow.visibility = View.GONE
+                        holder.expandArrow.visibility = View.VISIBLE
+                    }
                 }
 
                 holder.expandArrow.setOnClickListener {
-                    if (row.isExpanded) {
-                        //row.isExpanded = false
-                        collapseRow(position)
-                    } else {
-                        //row.isExpanded = true
-                        /*holder.collapseArrow.visibility = View.VISIBLE
-                        holder.expandArrow.visibility = View.GONE*/
-                        expandRow(position)
-                    }
+                    expandRow(position)
                 }
                 holder.collapseArrow.setOnClickListener {
-                    if (row.isExpanded) {
-                        //row.isExpanded = false
-                        collapseRow(position)
-                        /*holder.collapseArrow.visibility = View.GONE
-                        holder.expandArrow.visibility = View.VISIBLE*/
-
-                    }
+                    collapseRow(position)
                 }
             }
             ExpandableModel.CHILD -> {
@@ -122,7 +111,6 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                     }
                     myList.removeAt(nextPosition)
                 }
-
                 notifyDataSetChanged()
             }
         }
