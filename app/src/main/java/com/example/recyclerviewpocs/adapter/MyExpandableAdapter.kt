@@ -127,6 +127,16 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         notifyDataSetChanged()
     }
 
+    fun getCheckedParents(): String{
+        var result: String = ""
+        for(i in myList){
+            if(i.type == ExpandableModel.HEADER && i.isChecked){
+                result += i.header?.headerTitle + "\n"
+            }
+        }
+        return result
+    }
+
     override fun getItemCount(): Int = myList.size
 
     override fun getItemViewType(position: Int): Int = myList[position].type

@@ -2,6 +2,7 @@ package com.example.recyclerviewpocs
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
     private fun initUi() {
         cb_main.setOnCheckedChangeListener { _, b ->
             myExpandableAdapter?.selectUnSelectAll(b)
+        }
+        btn_get_checked_parents.setOnClickListener {
+            Toast.makeText(this, myExpandableAdapter?.getCheckedParents(), Toast.LENGTH_LONG).show()
         }
     }
 
