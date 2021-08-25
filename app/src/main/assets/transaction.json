@@ -1,0 +1,43 @@
+{
+  "transactionList": [
+    {
+      "headerTitle": "Payment Request",
+      "childrenList": [
+        {"childTitle": "Credit Card Payment", "rimNum": "OCIBPAYOORBAL157176155108","dateTime": "09-02-2020 13:31:15", "amount": "QAR 20,000.00"},
+        {"childTitle": "Kahramaa Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "09-02-2020 13:31:15", "amount": "QAR 240,500.00"},
+        {"childTitle": "Ooredoo Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,000.00"}
+      ]
+    },
+
+    {
+      "headerTitle": "Transfer Request",
+      "childrenList": [
+        {"childTitle": "Credit Card Payment", "rimNum": "OCIBPAYOORBAL157176155108","dateTime": "09-02-2020 13:31:15", "amount": "QAR 20,000.00"},
+        {"childTitle": "Kahramaa Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "09-02-2020 13:31:15", "amount": "QAR 240,500.00"},
+        {"childTitle": "Ooredoo Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,000.00"},
+        {"childTitle": "Oore Bill", "rimNum": "OCIFGAYOORBAL127256125555","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,123.00"},
+        {"childTitle": "Kah Bill", "rimNum": "OCIFGAYOORBAL127256126666","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,321.00"}
+      ]
+    },
+
+    {
+      "headerTitle": "Accounts",
+      "childrenList": [
+        {"childTitle": "Credit Card Payment", "rimNum": "OCIBPAYOORBAL157176155108","dateTime": "09-02-2020 13:31:15", "amount": "QAR 20,000.00"},
+        {"childTitle": "Kahramaa Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "09-02-2020 13:31:15", "amount": "QAR 240,500.00"},
+        {"childTitle": "Qatar Bill", "rimNum": "OCIFGAYOORBAL127256112345","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,567.00"},
+        {"childTitle": "Doha Bill", "rimNum": "OCIFGAYOORBAL127256154321","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,780.00"}
+      ]
+    },
+
+    {
+      "headerTitle": "Service Request",
+      "childrenList": [
+        {"childTitle": "Kahramaa Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "09-02-2020 13:31:15", "amount": "QAR 240,500.00"},
+        {"childTitle": "Ooredoo Bill", "rimNum": "OCIFGAYOORBAL127256126606","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,000.00"},
+        {"childTitle": "Oore Bill", "rimNum": "OCIFGAYOORBAL127256125555","dateTime": "04-02-2020 13:31:15", "amount": "QAR 40,123.00"}
+      ]
+    }
+  ]
+}
+
