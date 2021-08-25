@@ -22,6 +22,13 @@ class MainActivity : AppCompatActivity() {
         initViewModel()
         myViewModel.obtainCountryStateCapitals()
         observeViewModelResponse()
+        initUi()
+    }
+
+    private fun initUi() {
+        cb_main.setOnCheckedChangeListener { _, b ->
+            myExpandableAdapter?.selectUnSelectAll(b)
+        }
     }
 
     private fun initViewModel(){

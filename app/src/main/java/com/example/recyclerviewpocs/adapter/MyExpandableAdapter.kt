@@ -91,8 +91,7 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                     expandableModel.type = ExpandableModel.CHILD
                     expandableModel.child = child
                     expandableModel.header = null
-                    myList.add(++nextPosition, expandableModel
-                    )
+                    myList.add(++nextPosition, expandableModel)
                 }
                 notifyDataSetChanged()
             }
@@ -117,6 +116,15 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                 notifyDataSetChanged()
             }
         }
+    }
+
+    fun selectUnSelectAll(b: Boolean){
+        for(i in myList){
+            if(i.type == ExpandableModel.HEADER){
+                i.isChecked = b
+            }
+        }
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = myList.size
