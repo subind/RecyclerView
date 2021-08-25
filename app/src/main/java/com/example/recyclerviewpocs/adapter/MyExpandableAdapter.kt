@@ -44,23 +44,31 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
             ExpandableModel.HEADER -> {
                 (holder as HeaderViewHolder).headerTitle.text =
                     row.header.headerTitle
+                if(row.isExpanded) {
+                    holder.expandArrow.visibility = View.GONE
+                    holder.collapseArrow.visibility = View.VISIBLE
+                }else{
+                    holder.collapseArrow.visibility = View.GONE
+                    holder.expandArrow.visibility = View.VISIBLE
+                }
+
                 holder.expandArrow.setOnClickListener {
                     if (row.isExpanded) {
-                        row.isExpanded = false
+                        //row.isExpanded = false
                         collapseRow(position)
                     } else {
-                        row.isExpanded = true
-                        holder.collapseArrow.visibility = View.VISIBLE
-                        holder.expandArrow.visibility = View.GONE
+                        //row.isExpanded = true
+                        /*holder.collapseArrow.visibility = View.VISIBLE
+                        holder.expandArrow.visibility = View.GONE*/
                         expandRow(position)
                     }
                 }
                 holder.collapseArrow.setOnClickListener {
                     if (row.isExpanded) {
-                        row.isExpanded = false
+                        //row.isExpanded = false
                         collapseRow(position)
-                        holder.collapseArrow.visibility = View.GONE
-                        holder.expandArrow.visibility = View.VISIBLE
+                        /*holder.collapseArrow.visibility = View.GONE
+                        holder.expandArrow.visibility = View.VISIBLE*/
 
                     }
                 }
@@ -79,6 +87,11 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         var nextPosition = position
         when (row.type) {
             ExpandableModel.HEADER -> {
+                myList.removeAt(position)
+                myList.add(
+                    position,
+                    ExpandableModel(ExpandableModel.HEADER, row.header, true)
+                )
                 for (child in row.header.childrenList) {
                     myList.add(
                         ++nextPosition,
@@ -98,6 +111,11 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         var nextPosition = position + 1
         when (row.type) {
             ExpandableModel.HEADER -> {
+                myList.removeAt(position)
+                myList.add(
+                    position,
+                    ExpandableModel(ExpandableModel.HEADER, row.header, false)
+                )
                 outerloop@ while (true) {
                     if (nextPosition == myList.size || myList[nextPosition].type == ExpandableModel.HEADER) {
                         break@outerloop
