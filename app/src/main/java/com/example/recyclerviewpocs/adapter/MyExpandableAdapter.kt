@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewpocs.R
 import com.example.recyclerviewpocs.models.ExpandableModel
+import com.example.recyclerviewpocs.utils.CallBackInterface
 import kotlinx.android.synthetic.main.child_row.view.*
 import kotlinx.android.synthetic.main.header_row.view.*
 
 class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    lateinit var callBackInterface: CallBackInterface
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -64,6 +67,9 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                 }
                 holder.cbParent.setOnClickListener {
                     checkedParentRow(position, holder.cbParent.isChecked)
+                    if(!holder.cbParent.isChecked) {
+                        callBackInterface.callBackMethod()
+                    }
                 }
             }
             ExpandableModel.CHILD -> {
@@ -156,6 +162,10 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         internal var dateTime = itemView.tv_datetime
         internal var amount = itemView.tv_amt
         internal var rightArrow = itemView.iv_right
+    }
+
+    fun initCallBackInterface(callBackInterface: CallBackInterface){
+        this.callBackInterface = callBackInterface
     }
 
 }
