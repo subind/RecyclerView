@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+PLEASE NOTE :-
+
+USE THE BELOW CODE FOR SETTING VARYING SIZE, FONT & COLOR TO THE SAME TEXT-VIEW ::
+
+        var myString = "QAR 50,000,000,00"
+        var ss1 = SpannableString(myString)
+
+        ss1.setSpan(AbsoluteSizeSpan(12, true), 0, 3, 0)
+        ss1.setSpan(ForegroundColorSpan(resources.getColor(R.color.app_black)), 0, 3, 0)
+        ss1.setSpan(CustomTypefaceSpan("", ResourcesCompat.getFont(this, R.font.roboto_medium)!!), 0, 3, 0)
+
+        ss1.setSpan(AbsoluteSizeSpan(18, true), 4, myString.length, 0)
+        ss1.setSpan(ForegroundColorSpan(resources.getColor(R.color.app_blue)), 4, myString.length, 0)
+        ss1.setSpan(CustomTypefaceSpan("", ResourcesCompat.getFont(this, R.font.roboto_regular)!!), 4, myString.length, 0)
+
+        var myTextView = findViewById<TextView>(R.id.tv)
+        myTextView.text = ss1
+
+        -->
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
