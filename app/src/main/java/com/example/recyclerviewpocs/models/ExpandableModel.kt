@@ -10,8 +10,8 @@ class ExpandableModel {
 
     var type: Int = 0
     var isExpanded: Boolean = false
-    var isChecked: Boolean = false
     var header: TransactionType? = null
     var child: TransactionBill? = null
+    var drawable: Int = 0
 
 }

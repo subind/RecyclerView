@@ -9,6 +9,11 @@ import com.example.recyclerviewpocs.models.ExpandableModel
 import com.example.recyclerviewpocs.utils.CallBackInterface
 import kotlinx.android.synthetic.main.child_row.view.*
 import kotlinx.android.synthetic.main.header_row.view.*
+import kotlinx.android.synthetic.main.header_row.view.header_row
+import kotlinx.android.synthetic.main.header_row.view.iv_collapse
+import kotlinx.android.synthetic.main.header_row.view.iv_expand
+import kotlinx.android.synthetic.main.header_row.view.tv_header
+import kotlinx.android.synthetic.main.header_row_new.view.*
 import kotlinx.android.synthetic.main.selector_row.view.*
 
 class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
@@ -21,7 +26,7 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
             ExpandableModel.HEADER -> {
                 HeaderViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.header_row, parent, false
+                        R.layout.header_row_new, parent, false
                     )
                 )
             }
@@ -54,6 +59,8 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         when (row.type) {
             ExpandableModel.HEADER -> {
                 (holder as HeaderViewHolder).headerTitle.text = row.header?.headerTitle
+                holder.icon.setBackgroundResource(row.drawable)
+                holder.childCountTv.text = row.header?.childrenList?.size.toString()
 
                 when(row.isExpanded){
                     true -> {
@@ -162,12 +169,14 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         }
     }
 
-    fun getCheckedItems(): String{
-        var result: String = ""
+    fun getCheckedItems(): String?{
+        var result: String? = ""
         for(i in myList){
-            for(j in i.header?.childrenList ?: mutableListOf()) {
-                if (j.childCheckStatus) {
-                    result += j.cId.toString() + "\n"
+            if(i.type == ExpandableModel.HEADER) {
+                for (j in i.header?.childrenList ?: mutableListOf()) {
+                    if (j.childCheckStatus) {
+                        result += j.cId.toString() + "\n"
+                    }
                 }
             }
         }
@@ -183,6 +192,8 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         internal var headerTitle = itemView.tv_header
         internal var expandArrow = itemView.iv_expand
         internal var collapseArrow = itemView.iv_collapse
+        internal var icon = itemView.icon_title
+        internal var childCountTv = itemView.child_count_tv
     }
 
     class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
