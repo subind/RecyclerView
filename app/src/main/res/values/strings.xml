@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RecyclerViewPOCs</string>
+    <string name="num_pending">%1$s Pending</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.recyclerviewpocs.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewpocs.R
 import com.example.recyclerviewpocs.models.ExpandableModel
@@ -69,6 +70,10 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                 holder.rimNumber.text = row.child?.rimNum
                 holder.dateTime.text = row.child?.dateTime
                 holder.amount.text = row.child?.amount
+                holder.rightArrow.setOnClickListener{
+                    Toast.makeText(holder.rightArrow.context, "Title: ${row.child?.childTitle},\nRim no: ${row.child?.rimNum},\n" +
+                            "DateTime: ${row.child?.dateTime},\nAmount: ${row.child?.amount}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                     is ResultOf.Success -> {
                         val countryStateInfo =  myViewModel.prepareDataForExpandableAdapter(it.value)
                         populateAdapterWithInfo(countryStateInfo)
-
+                        setNumberOfPendingItemsText(countryStateInfo)
                     }
 
                     is ResultOf.Failure -> {
@@ -60,6 +60,14 @@ class MainActivity : AppCompatActivity() {
             //rv.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
             it.notifyDataSetChanged()
         }
+    }
+
+    private fun setNumberOfPendingItemsText(expandableCountryStateList : MutableList<ExpandableModel>){
+        var numOfPendingItems = 0
+        for(i in expandableCountryStateList){
+            numOfPendingItems += i.header?.childrenList?.size ?: 0
+        }
+        pending_tv.text = getString(R.string.num_pending, numOfPendingItems.toString())
     }
 
 }
