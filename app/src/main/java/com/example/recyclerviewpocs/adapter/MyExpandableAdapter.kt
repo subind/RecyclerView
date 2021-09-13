@@ -162,11 +162,13 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         }
     }
 
-    fun getCheckedParents(): String{
+    fun getCheckedItems(): String{
         var result: String = ""
         for(i in myList){
-            if(i.type == ExpandableModel.HEADER && i.isChecked){
-                result += i.header?.headerTitle + "\n"
+            for(j in i.header?.childrenList ?: mutableListOf()) {
+                if (j.childCheckStatus) {
+                    result += j.cId.toString() + "\n"
+                }
             }
         }
         return result
@@ -197,8 +199,8 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         internal var cbSelector = itemView.selector_cb
     }
 
-    /*fun initCallBackInterface(callBackInterface: CallBackInterface){
+    fun initCallBackInterface(callBackInterface: CallBackInterface){
         this.callBackInterface = callBackInterface
-    }*/
+    }
 
 }

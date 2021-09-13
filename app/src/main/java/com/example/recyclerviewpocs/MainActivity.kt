@@ -2,6 +2,7 @@ package com.example.recyclerviewpocs
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity()/*, CallBackInterface*/ {
             myExpandableAdapter?.selectUnSelectAll(cb_main.isChecked)
         }*/
         btn_get_checked_parents.setOnClickListener {
-            Toast.makeText(this, myExpandableAdapter?.getCheckedParents(), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Checked Items:\n${myExpandableAdapter?.getCheckedItems()}", Toast.LENGTH_LONG).show()
+            Log.i("subind", "initUi: ${myExpandableAdapter?.getCheckedItems()}")
         }
     }
 
