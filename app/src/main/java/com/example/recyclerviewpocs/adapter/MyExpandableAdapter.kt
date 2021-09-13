@@ -54,7 +54,6 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         when (row.type) {
             ExpandableModel.HEADER -> {
                 (holder as HeaderViewHolder).headerTitle.text = row.header?.headerTitle
-                /*holder.cbParent.isChecked = row.isChecked*/
 
                 when(row.isExpanded){
                     true -> {
@@ -73,12 +72,6 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                 holder.collapseArrow.setOnClickListener {
                     collapseRow(position)
                 }
-                /*holder.cbParent.setOnClickListener {
-                    checkedParentRow(position, holder.cbParent.isChecked)
-                    if(!holder.cbParent.isChecked) {
-                        callBackInterface.callBackMethod()
-                    }
-                }*/
             }
             ExpandableModel.CHILD -> {
                 (holder as ChildViewHolder).childTitle.text = row.child?.childTitle
@@ -96,6 +89,7 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                                 i.header?.headerCheckStatus = false
                             }
                         }
+                        notifyDataSetChanged()
                     }else{
                         row.child?.childCheckStatus = true
                         holder.cbChild.isChecked = row.child?.childCheckStatus ?: false
@@ -110,14 +104,12 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
                         holder.cbSelector.isChecked = row.header?.headerCheckStatus ?: false
                         for(i in row.header?.childrenList ?: mutableListOf()){
                             i.childCheckStatus = false
-                            //row.child?.childCheckStatus = false
                         }
                     }else{
                         row.header?.headerCheckStatus = true
                         holder.cbSelector.isChecked = row.header?.headerCheckStatus ?: false
                         for(i in row.header?.childrenList ?: mutableListOf()){
                             i.childCheckStatus = true
-                            //row.child?.childCheckStatus = true
                         }
                     }
                     notifyDataSetChanged()
@@ -125,11 +117,6 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
             }
         }
     }
-
-    /*private fun checkedParentRow(position: Int, b: Boolean) {
-        myList[position].isChecked = b
-        notifyDataSetChanged()
-    }*/
 
     private fun expandRow(position: Int) {
         val row = myList[position]
@@ -174,15 +161,6 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
             }
         }
     }
-
-    /*fun selectUnSelectAll(b: Boolean){
-        for(i in myList){
-            if(i.type == ExpandableModel.HEADER){
-                i.isChecked = b
-            }
-        }
-        notifyDataSetChanged()
-    }*/
 
     fun getCheckedParents(): String{
         var result: String = ""
