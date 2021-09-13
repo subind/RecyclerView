@@ -28,7 +28,7 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
             ExpandableModel.CHILD -> {
                 ChildViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.child_row, parent, false
+                        R.layout.child_row_new, parent, false
                     )
                 )
             }
