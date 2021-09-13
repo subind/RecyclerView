@@ -5,6 +5,7 @@ class ExpandableModel {
     companion object{
         const val HEADER = 1
         const val CHILD = 2
+        const val SELECTOR = 3
     }
 
     var type: Int = 0

@@ -12,7 +12,7 @@ import com.example.recyclerviewpocs.utils.CallBackInterface
 import com.example.recyclerviewpocs.utils.ResultOf
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), CallBackInterface {
+class MainActivity : AppCompatActivity()/*, CallBackInterface*/ {
 
     lateinit var myViewModel: MainViewModel
     var myExpandableAdapter : MyExpandableAdapter? = null
@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity(), CallBackInterface {
     }
 
     private fun initUi() {
-        cb_main.setOnClickListener {
+        /*cb_main.setOnClickListener {
             myExpandableAdapter?.selectUnSelectAll(cb_main.isChecked)
-        }
+        }*/
         btn_get_checked_parents.setOnClickListener {
             Toast.makeText(this, myExpandableAdapter?.getCheckedParents(), Toast.LENGTH_LONG).show()
         }
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), CallBackInterface {
     private fun populateAdapterWithInfo(expandableCountryStateList : MutableList<ExpandableModel>){
         myExpandableAdapter = MyExpandableAdapter(expandableCountryStateList)
         myExpandableAdapter?.let {
-            it.initCallBackInterface(this)
+            //it.initCallBackInterface(this)
             val layoutManager = LinearLayoutManager(this)
             rv.layoutManager = layoutManager
             rv.adapter = it
@@ -75,9 +75,9 @@ class MainActivity : AppCompatActivity(), CallBackInterface {
         }
     }
 
-    override fun callBackMethod() {
+    /*override fun callBackMethod() {
         cb_main.isChecked = false
-    }
+    }*/
 
 
 }
