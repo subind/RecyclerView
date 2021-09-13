@@ -43,6 +43,8 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         when (row.type) {
             ExpandableModel.HEADER -> {
                 (holder as HeaderViewHolder).headerTitle.text = row.header?.headerTitle
+                holder.icon.setBackgroundResource(row.drawable)
+                holder.childCount.text = row.header?.childrenList?.size.toString()
 
                 when(row.isExpanded){
                     true -> {
@@ -118,6 +120,8 @@ class MyExpandableAdapter(var myList: MutableList<ExpandableModel>) :
         internal var headerTitle = itemView.tv_header
         internal var expandArrow = itemView.iv_expand
         internal var collapseArrow = itemView.iv_collapse
+        internal var icon = itemView.icon_title
+        internal var childCount = itemView.child_count_tv
     }
 
     class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

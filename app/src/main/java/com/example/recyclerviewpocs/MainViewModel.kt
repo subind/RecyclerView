@@ -9,11 +9,12 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val dispatcher: CoroutineDispatcher, private var myRepository: MyRepository?) : ViewModel(),
-    LifecycleObserver {
+    LifecycleObserver{
     private val LOG_TAG = "CountryStateViewModel"
     var loading: MutableLiveData<Boolean> = MutableLiveData()
     private val _obtainCountryStatesResponse= MutableLiveData<ResultOf<Transaction>>()
     val  obtainCountryStatesResponse: LiveData<ResultOf<Transaction>> = _obtainCountryStatesResponse
+    private val iconList = mutableListOf<Int>()
 
     fun obtainCountryStateCapitals(){
         loading.postValue(true)
@@ -41,14 +42,26 @@ class MainViewModel(private val dispatcher: CoroutineDispatcher, private var myR
 
     fun prepareDataForExpandableAdapter(transaction: Transaction) : MutableList<ExpandableModel>{
         var expandableCountryList = mutableListOf<ExpandableModel>()
-        for (childList in transaction.transactionList) {
+        for ((i, childList) in transaction.transactionList.withIndex()) {
             var expandableModel = ExpandableModel()
             expandableModel.type = ExpandableModel.HEADER
             expandableModel.header = childList
             expandableModel.child = null
+            expandableModel.drawable = iconList[i]
             expandableCountryList.add(expandableModel)
         }
         return expandableCountryList
+    }
+
+    private fun prepareIconList() {
+        iconList.add(0, R.drawable.pen_req)
+        iconList.add(1, R.drawable.tra_req)
+        iconList.add(2, R.drawable.acc_req)
+        iconList.add(3, R.drawable.ser_req)
+    }
+
+    init {
+        prepareIconList()
     }
 
 }
